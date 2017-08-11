@@ -1,6 +1,6 @@
 <?php
 
-namespace Storage24\Providers;
+namespace Storage24Lite\Providers;
 
 use Plenty\Plugin\ServiceProvider;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Storage24\Controllers;
+namespace Storage24Lite\Controllers;
 
 use Plenty\Plugin\Controller;
 use Plenty\Plugin\Http\Request;
@@ -24,25 +24,25 @@ class ContentController extends Controller
     {
       $result = $whRepo->all();
       $templateData = array('warehouses' => $result);
-      return $twig->render('Storage24::content.start', $templateData);
+      return $twig->render('Storage24Lite::content.start', $templateData);
     }
     public function render_incoming(Twig $twig, WarehouseRepositoryContract $whRepo)
     {
       $result = $whRepo->all();
       $templateData = array('warehouses' => $result);
-      return $twig->render('Storage24::content.incoming', $templateData);
+      return $twig->render('Storage24Lite::content.incoming', $templateData);
     }
     public function render_transfer(Twig $twig, WarehouseRepositoryContract $whRepo)
     {
       $result = $whRepo->all();
       $templateData = array('warehouses' => $result);
-      return $twig->render('Storage24::content.transfer', $templateData);
+      return $twig->render('Storage24Lite::content.transfer', $templateData);
     }
     public function render_inventur(Twig $twig, WarehouseRepositoryContract $whRepo)
     {
       $result = $whRepo->all();
       $templateData = array('warehouses' => $result);
-      return $twig->render('Storage24::content.inventur', $templateData);
+      return $twig->render('Storage24Lite::content.inventur', $templateData);
     }
     public function listWarehouses(WarehouseRepositoryContract $whRepo)
     {
