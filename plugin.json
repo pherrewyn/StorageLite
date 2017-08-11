@@ -4,5 +4,5 @@
     "namespace"         :"Storage24Lite",
     "author"            :"Pascal Herrewyn GmbH",
     "type"              :"template",
-    "serviceProvider"   :"Storage24\\Providers\\WarehouseServiceProvider"
+    "serviceProvider"   :"Storage24Lite\\Providers\\WarehouseServiceProvider"
 }
