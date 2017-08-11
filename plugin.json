@@ -1,0 +1,8 @@
+{
+    "name"              :"Storage24_Lite",
+    "description"       :"Storage24",
+    "namespace"         :"ST24",
+    "author"            :"Pascal Herrewyn GmbH",
+    "type"              :"template",
+    "serviceProvider"   :"Storage24\\Providers\\WarehouseServiceProvider"
+}

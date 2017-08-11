@@ -1,0 +1,114 @@
+<head>
+  <title>Storage24</title>
+</head>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="{{ plugin_path('WH') }}/js/base.js"></script>
+<script src="{{ plugin_path('WH') }}/js/jquery-ui.min.js"></script>
+<script src="{{ plugin_path('WH') }}/js/tether.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="{{ plugin_path('WH') }}/css/basic.css">
+
+<!-- SPINNER START -->
+<div id='load' style='display: none;'>
+  <div class="spinner">
+    <div class="rect1"></div>
+    <div class="rect2"></div>
+    <div class="rect3"></div>
+    <div class="rect4"></div>
+    <div class="rect5"></div>
+  </div>
+
+</div>
+<!-- SPINNER END -->
+<!-- FREEPLACES DIALOG START -->
+<div id="freeplacesdialog" title="Freie Lagerorte" style='display: none;'>
+  <div id="freeplacessettings">
+  <p>Bitte berechnen Sie zuerst Ihre freien Lagerorte.</p>
+  <p class='text-danger' id='ueberschnitt'>Die freien Lagerorte sind lokal gespeichert (Außer Sie werden neu berechnet!), bei Mehrfachnutzung des Plugins kann es zu Überschneidungen führen.</p>
+  <a href='#' onclick="$('#ueberschnitt').fadeOut(200);$(this).fadeOut(200)" class='text-warning'>Hinweis ausblenden</a>
+  <p>Lager:
+    <select class='form-control' id='freeplaceswarehouses'>
+      {% for warehouse in warehouses %}
+          <option value="{{ warehouse.id }}">{{ warehouse.name }}</option>
+      {% endfor %}
+    </select>
+  </p>
+  <br />
+  <input type='button' class='btn' value='Lagerorte berechnen' id='calcfreeplaces' onclick='getfreeplaces($("#freeplaceswarehouses").val());'>
+  <hr>
+  <p>Limit: </p><input type='number' id='freeplaceslimit' class='form-control' value='4' min='1'>
+  <p>Typ: </p><select class='form-control' id='freeplacestype'>
+    <option value='all'>Alle</option>
+    <option value='small'>klein</option>
+    <option value='medium'>mittel</option>
+    <option value='large'>groß</option>
+    <option value='europallet'>Europalette</option>
+  </select>
+  <p>Regal: <div id='rackselect'><select class='form-control' id='freeplacesracks'>
+  </select></div></p>
+
+  <p>Boden: <div id='shelvselect'><select class='form-control' id='shelvselects'>
+    <option value='all'>Alle</option>
+  </select></div></p>
+</div>
+  <input type='button' class='btn' value='Zeige Lagerorte' id='showplaces' onclick='returnfreeplaces();'>
+  <br /><a href="#" id="togglemenu" act="1" style="font-size: 14px;">Menü ausblenden</a>
+  <br /><a href="#" style="font-size: 14px;" onclick="exportfreeplaces();">Export Lagerorte</a>
+  <div id='freeplacesausgabe'>
+  </div>
+</div>
+<!-- FREEPLACES DIALOG END -->
+<!-- LOGIN FORM START -->
+<div id='login' style='display: none;'>
+  <div class="login">
+    <h3>Login</h3>
+    <br />
+    <input type="text" placeholder="Benutzername" id="username" class="form-control">
+    <input type="password" placeholder="Passwort" id="password" class="form-control">
+    <input type="button" class="btn btn-primary" value="Anmelden" id="submit">
+    <br />
+  </div>
+</div>
+<!-- LOGIN FORM END -->
+
+<div class="container" style="border: 1px solid #D8D8D8">
+  <div class="head">
+    <img src="{{ plugin_path('WH') }}/css/STORAGE.png" width="200" style="margin-top: 5px;"> </img>
+    <p style="text-align: right; display: none;" id="names">Willkommen <span id="realName"></span> (<a id="logout" href="#" onclick="logout();">Abmelden</a>)</p>
+    <hr>
+  </div>
+
+  <h1 style="padding-top: 20px; padding-bottom: 20px; display: inline-block;" class="menutip" menu="einbuchen" href="/storage/">Einbuchen</h1>&nbsp;
+  <h1 style="padding-top: 20px; padding-bottom: 20px; display: inline-block;" class="menutip" menu="umbuchen" href="/storage/transfer">Umbuchen</h1>
+  <p>Modul:
+    <select id="menu_module_select">
+      <option value="std">Standard</option>
+      <option value="pl">Lagerorte</option>
+    </select>
+  </p>
+  <input type='button' class='btn' style='float: right' value='Freie Lagerorte' onclick='togglefreielagerorte();'>
+  <!-- Warehouses[0] START -->
+  <div class="warehouses">
+    {% if warehouses is not null %}
+      {% for warehouse in warehouses %}
+          <label><input type="checkbox" class="warehousecheckbox" whid="{{ warehouse.id }}" > <span whid="{{ warehouse.id }}" class="whname">{{ warehouse.name }}</span></label>
+          &nbsp;
+      {% endfor %}
+    {% else %}
+        <p>Bitte legen Sie ein Lager an</p>
+      {% endif %}
+
+  </div>
+  <!-- Warehouses[0] END -->
+
+  <script>
+  $( function() {
+    $( "#freeplacesdialog" ).dialog({maxHeight: "700px", autoOpen: false});
+  } );
+  </script>
+  {% block Body %}
+
+  {% endblock %}

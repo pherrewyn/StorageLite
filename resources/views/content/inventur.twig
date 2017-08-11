@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<!---->
+<h1>Inventur</h1>
+<!-- Warehouses[0] START -->
+<div class="warehouses">
+  {% if warehouses is not null %}
+    {% for warehouse in warehouses %}
+      <label>
+        <input type="checkbox" class="warehousecheckbox" whid="{{ warehouse.id }}" > {{ warehouse.name }}
+      &nbsp;</label>
+    {% endfor %}
+  {% else %}
+    <p>Bitte legen Sie ein Lager an</p>
+  {% endif %}
+</div>
+<!-- Warehouses[0] END -->
