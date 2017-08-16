@@ -328,6 +328,12 @@ function findPlaces() {
         $("#lagerorteoutput").html("<div class='find-false'><p>Bitte wählen Sie ein Lager aus.</p></div>");
         $('#load').hide();
     }
+    if(comp > 1 || comp == 0)
+    {
+      $('#lagerortean').prop("disabled", true);
+    }else {
+      $('#lagerortean').removeAttr("disabled");
+    }
 
 }
 
@@ -467,7 +473,10 @@ function checkaccess() {
  * Funktion die einen Artikel "benutzt" beim button "Ok" wenn mehrere Artikel gefunden wurden
  */
 function usevariant(id, umbuchen = false, incomings = false) {
-
+    if($('#lagerortean'))
+    {
+      $('#lagerortean').removeAttr("disabled");
+    }
     var number = $("#variant_" + id).text();
     $('#output').html("<div class='find-true'>Artikel <span class='number'>" + number + "</span> wurde ausgewählt</div>");
     variationId = id;
