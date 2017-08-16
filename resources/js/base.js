@@ -911,7 +911,7 @@ function loadwarehouses(){
       else {
         warehouses[$(this).attr('whid')] = new Object();
         warehouses[$(this).attr('whid')] = 0;
-        $(this).removeAttr("checked");  
+        $(this).removeAttr("checked");
       }
   });
 }
@@ -974,7 +974,7 @@ $(document).ready(function() {
             }
             warehouses[$(this).attr('whid')] = new Object();
             warehouses[$(this).attr('whid')] = checked;
-            localStorage.setItem((this).attr('whid'), checked);
+            localStorage.setItem($(this).attr('whid'), checked);
         });
 
         if ($('.findarticle').is(":disabled") && $('#menu_var').text() == "umbuchen" && $('.locationean').is(":disabled")) {
