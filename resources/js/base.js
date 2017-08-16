@@ -898,11 +898,29 @@ function changemodul(modul) {
 function getmodul() {
     $('#menu_module_select').val($('#menu_model').text());
 }
+
+function loadwarehouses(){
+  $('.warehousecheckbox').each(function() {
+      var local = localStorage.getItem($(this).attr('whid'));
+      if(local == 1)
+      {
+      warehouses[$(this).attr('whid')] = new Object();
+      warehouses[$(this).attr('whid')] = 1;
+      $(this).prop("checked", true);
+      }
+      else {
+        warehouses[$(this).attr('whid')] = new Object();
+        warehouses[$(this).attr('whid')] = 0;
+        $(this).removeAttr("checked");  
+      }
+  });
+}
 /**
  * Wenn das dokument ready ist
  */
 $(document).ready(function() {
     checkaccess();
+    loadwarehouses();
 
     /**
      * Button "login" -> funktion login();
@@ -948,6 +966,7 @@ $(document).ready(function() {
     $('.warehousecheckbox').change(function() {
 
         $('.warehousecheckbox').each(function() {
+
             var checked = 0;
             if ($(this).is(":checked")) {
                 checked = 1;
@@ -955,6 +974,7 @@ $(document).ready(function() {
             }
             warehouses[$(this).attr('whid')] = new Object();
             warehouses[$(this).attr('whid')] = checked;
+            localStorage.setItem((this).attr('whid'), checked);
         });
 
         if ($('.findarticle').is(":disabled") && $('#menu_var').text() == "umbuchen" && $('.locationean').is(":disabled")) {
