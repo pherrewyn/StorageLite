@@ -283,9 +283,11 @@ function findPlaces() {
                     "Authorization": "Bearer " + localStorage.getItem("accessToken")
                 },
                 data: {
-                    variationId: variationId
+                    variationId: variationId,
+                    with: "storageLocation"
                 },
                 success: function(data) {
+                    console.log(data);
                     var locations = 0;
                     var html = "<p style='color: white; text-align: center; background-color: #008EBD; width: auto;'>Lager: " + $('.whname[whid=' + warehouseId + ']').text() + "</p><table class='table'><thead><th>LagerortId</th><th>Lagerort</th><th>Menge</th><th>Aktion</th></thead><tbody>";
 
@@ -295,7 +297,14 @@ function findPlaces() {
                             comp = comp + 1;
                             locationnames[this.storageLocationId] = new Object();
                             locationnames[this.storageLocationId] = warehouseId;
-                            html = html + "<tr><td>" + this.storageLocationId + "</td><td class='place' sid='" + this.storageLocationId + "'></td><td>" + this.quantity + "</td><td><span value='Umbuchen' id='umbuchen_" + this.storageLocationId + "' class='btn umbuchenbutton' sid='" + this.storageLocationId + "' wid='" + warehouseId + "' wname='" + $('.whname[whid=' + warehouseId + ']').text() + "' qty='" + this.quantity + "' onclick='umbuchenbutton(" + this.storageLocationId + ");'><i class='material-icons'>done</i></span></td></tr>";
+                            if(this.storageLocation == null)
+                            {
+                              var name = "Standard-Lagerort";
+                            }
+                            else {
+                              var name = this.storageLocation.name;
+                            }
+                            html = html + "<tr><td>" + this.storageLocationId + "</td><td class='place' sid='" + this.storageLocationId + "'>"+name+"</td><td>" + this.quantity + "</td><td><span value='Umbuchen' id='umbuchen_" + this.storageLocationId + "' class='btn umbuchenbutton' sid='" + this.storageLocationId + "' wid='" + warehouseId + "' wname='" + $('.whname[whid=' + warehouseId + ']').text() + "' qty='" + this.quantity + "' onclick='umbuchenbutton(" + this.storageLocationId + ");'><i class='material-icons'>done</i></span></td></tr>";
                         }
                     });
                     html = html + "</tbody></table>";
@@ -328,30 +337,7 @@ function findPlaces() {
  * @param locationnames:array
  */
 function getLocationName(locationames) {
-    $('#load').show();
-    $.each(locationames, function(locationId, warehouseId) {
 
-        if (locationId > 0) {
-            $('#load').show();
-            setTimeout(function() {
-                $.ajax({
-                    type: "GET",
-                    url: "/rest/stockmanagement/warehouses/" + warehouseId + "/management/storageLocations/" + locationId,
-                    headers: {
-                        "Authorization": "Bearer " + localStorage.getItem("accessToken")
-                    },
-                    success: function(data) {
-                        $('.place[sid=' + locationId + ']').text(data['name']);
-                    },
-                    error: function(data) {
-                        console.log(data);
-                    }
-                });
-            }, 5);
-        } else {
-            $('.place[sid=' + locationId + ']').text("Standard-Lagerort");
-        }
-    });
 
 }
 /**
