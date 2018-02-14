@@ -84,10 +84,10 @@ function findVariant(barcode, umbuchen = false, incomings = false) {
                     used = variant.id;
                     number = variant.number;
                     if ($('#menu_var').text() == "umbuchen") {
-                        $('#output').append("<div class='find-true'><p>Artikel <span id='variant_" + variant.id + "' class='number'>" + variant.number + "</span> wurde gefunden. </p><span variant='" + variant.id + "' class='use_variant btn'  onclick='usevariant(" + variant.id + ", true);'><i class='material-icons'>done</i></span></div>");
+                        $('#output').append("<div class='find-true'><p>Artikel <span id='variant_" + variant.id + "' class='number'>" + variant.number + "</span> wurde gefunden. </p><span variant='" + variant.id + "' class='use_variant btn'  onclick='usevariant(" + variant.id + ", true);'><i class='material-icons'>done</i></span><br><p>"+variant.name+"</p></div>");
 
                     } else {
-                        $('#output').append("<div class='find-true'><p>Artikel <span id='variant_" + variant.id + "' class='number'>" + variant.number + "</span> wurde gefunden. </p><span variant='" + variant.id + "' class='use_variant btn' onclick='usevariant(" + variant.id + "," + umbuchen + "," + incomings + ");'><i class='material-icons'>done</i></span></div>");
+                        $('#output').append("<div class='find-true'><p>Artikel <span id='variant_" + variant.id + "' class='number'>" + variant.number + "</span> wurde gefunden. </p><span variant='" + variant.id + "' class='use_variant btn' onclick='usevariant(" + variant.id + "," + umbuchen + "," + incomings + ");'><i class='material-icons'>done</i></span><br><p>"+variant.name+"</p></div>");
 
                     }
                 });
