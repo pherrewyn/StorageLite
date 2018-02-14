@@ -496,8 +496,4 @@ $(document).ready(function() {
      * Definiert Menu/Tab
      */
     $('.menutip[menu=' + $('#menu_var').text() + ']').removeClass("menutip");
-    getmodul();
-    $('#menu_module_select').change(function() {
-        changemodul($(this).val());
-    });
 });
