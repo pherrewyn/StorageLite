@@ -239,6 +239,10 @@ label:hover {
     cursor: pointer;
 }
 
+.standard{
+    display: inline-block;
+}
+
 input[type=checkbox]:hover {
     cursor: pointer;
 }
