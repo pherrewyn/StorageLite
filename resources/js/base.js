@@ -66,9 +66,7 @@ function findVariant(barcode, umbuchen = false, incomings = false) {
         },
         data: {
             barcode: barcode,
-            with: [{
-                item
-            }]
+            with: 'item'
         },
         success: function(data) {
             console.log(data);
