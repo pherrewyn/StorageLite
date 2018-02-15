@@ -201,6 +201,38 @@ function findPlaces() {
 
 }
 /**
+ * Funktion die, die Lagerortnamen ermittelt
+ * TO-DO: leider ist dies zurzeit nur möglich über einen Extra-Call der Rest-Api, d.h. es ist nicht sonderlich performant
+ * @param locationnames:array
+ */
+function getLocationName(locationames) {
+    $('#load').show();
+    $.each(locationames, function(locationId, warehouseId) {
+
+        if (locationId > 0) {
+            $('#load').show();
+            setTimeout(function() {
+                $.ajax({
+                    type: "GET",
+                    url: "/rest/stockmanagement/warehouses/" + warehouseId + "/management/storageLocations/" + locationId,
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("accessToken")
+                    },
+                    success: function(data) {
+                        $('.place[sid=' + locationId + ']').text(data['name']);
+                    },
+                    error: function(data) {
+                        console.log(data);
+                    }
+                });
+            }, 5);
+        } else {
+            $('.place[sid=' + locationId + ']').text("Standard-Lagerort");
+        }
+    });
+
+}
+/**
  * Login Funktion über die Rest-Api mit den Plenty-Logindaten
  */
 function login() {
