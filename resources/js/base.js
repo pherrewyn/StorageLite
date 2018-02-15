@@ -123,7 +123,83 @@ function findVariant(barcode, umbuchen = false, incomings = false) {
         }
     });
 }
+/**
+ * Funktion die, die Lagerorte eines Artikels findet
+ * beachtet werden die LagerCheckboxen
+ */
+function findPlaces() {
+    $('#load').show();
+    $('#lagerorteoutput').show();
+    $('#lagerorteoutput').html("");
 
+    $('#selectedoutput').hide();
+    var comp = 0;
+    var warehousesc = 0;
+    var locationnames = new Object();
+    $.each(warehouses, function(warehouseId, active) {
+        if (active == "1") {
+            warehousesc++;
+            $.ajax({
+                async: false,
+                type: "GET",
+                url: "/rest/stockmanagement/warehouses/" + warehouseId + "/stock/storageLocations",
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("accessToken")
+                },
+                data: {
+                    variationId: variationId,
+                    with: "storageLocation"
+                },
+                success: function(data) {
+                    console.log(data);
+                    var locations = 0;
+                    var html = "<p style='color: white; text-align: center; background-color: #008EBD; width: auto;'>Lager: " + $('.whname[whid=' + warehouseId + ']').text() + "</p><table class='table'><thead><th>LagerortId</th><th>Lagerort</th><th>Menge</th><th>Aktion</th></thead><tbody>";
+
+                    $.each(data.entries, function() {
+                        if (this.quantity > 0) {
+                            locations = locations + 1;
+                            comp = comp + 1;
+                            locationnames[this.storageLocationId] = new Object();
+                            locationnames[this.storageLocationId] = warehouseId;
+                            if(this.storageLocation == null)
+                            {
+                              var name = "Standard-Lagerort";
+                            }
+                            else {
+                              var name = this.storageLocation.name;
+                            }
+                            html = html + "<tr><td>" + this.storageLocationId + "</td><td class='place' sid='" + this.storageLocationId + "'>"+name+"</td><td>" + this.quantity + "</td><td><span value='Umbuchen' id='umbuchen_" + this.storageLocationId + "' class='btn umbuchenbutton' sid='" + this.storageLocationId + "' wid='" + warehouseId + "' wname='" + $('.whname[whid=' + warehouseId + ']').text() + "' qty='" + this.quantity + "' onclick='umbuchenbutton(" + this.storageLocationId + ");'><i class='material-icons'>done</i></span></td></tr>";
+                        }
+                    });
+                    html = html + "</tbody></table>";
+                    if (locations > 0) {
+                        $("#lagerorteoutput").append(html);
+                        getLocationName(locationnames);
+                    } else {
+                        $("#lagerorteoutput").append("<div class='find-false'><p>Für das Lager <b>" + $('.whname[whid=' + warehouseId + ']').text() + "</b> wurde kein Eintrag gefunden</p></div>");
+                    }
+
+                },
+                error: function(data) {
+                    console.log(data);
+                }
+            });
+
+        }
+    });
+
+    if (warehousesc == 0) {
+        $("#lagerorteoutput").html("<div class='find-false'><p>Bitte wählen Sie ein Lager aus.</p></div>");
+        $('#load').hide();
+    }
+    if(comp > 1 || comp == 0)
+    {
+      $('#lagerortean').prop("disabled", true);
+    }else {
+      $('#lagerortean').removeAttr("disabled");
+    }
+
+}
 /**
  * Login Funktion über die Rest-Api mit den Plenty-Logindaten
  */
