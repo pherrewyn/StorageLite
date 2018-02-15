@@ -65,9 +65,13 @@ function findVariant(barcode, umbuchen = false, incomings = false) {
             "Authorization": "Bearer " + localStorage.getItem("accessToken")
         },
         data: {
-            barcode: barcode
+            barcode: barcode,
+            with: [{
+                item
+            }]
         },
         success: function(data) {
+            console.log(data);
             variationId = 0;
             var items = 0;
             var used;
