@@ -1,8 +1,19 @@
 {
     "name"              :"Storage24Lite",
-    "description"       :"Storage24",
+    "description"       :"Plugin zum Einbuchen und Umbuchen eurer Ware",
+    "keywords"          :["lagerorte", "stock", "stockmanagement", "warehouse", "warenhaus", "mobile warehouse", "mobile"],
     "namespace"         :"Storage24Lite",
     "author"            :"Pascal Herrewyn GmbH",
+    "authorIcon"        :"icon_author_xs.png",
     "type"              :"template",
-    "serviceProvider"   :"Storage24Lite\\Providers\\WarehouseServiceProvider"
+    "pluginIcon"        :"icon_plugin_xs.png",
+    "version"           :"1.0.0",
+    "license"           :"Copyright by Pascal Herrewyn GmbH",
+    "price"             :4.99,    
+    "serviceProvider"   :"Storage24Lite\\Providers\\WarehouseServiceProvider",
+    "shortDescription": {
+        "de": "Storage24Lite ist ein PlentyMarkets Plugin welches euch ermöglicht eure Waren einzubuchen oder umzubuchen",
+        "en": "Storage24Lite is a PlentyMarkets Plugin which gives you the posibility to book incomings and to book redistribute"
+    },
+    "categories": ["3521"]
 }
