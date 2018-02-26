@@ -8,8 +8,8 @@
     "type"              :"template",
     "pluginIcon"        :"icon_plugin_xs.png",
     "version"           :"1.0.0",
-    "license"           :"Copyright by Pascal Herrewyn GmbH",
-    "price"             :4.99,    
+    "license"           :"MIT",
+    "price"             :0,    
     "serviceProvider"   :"Storage24Lite\\Providers\\WarehouseServiceProvider",
     "shortDescription": {
         "de": "Storage24Lite ist ein PlentyMarkets Plugin welches euch ermöglicht eure Waren einzubuchen oder umzubuchen",
