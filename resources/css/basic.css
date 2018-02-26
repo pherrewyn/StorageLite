@@ -51,7 +51,6 @@ body {
 }
 
 .use_variant {
-    display: inline-block !important;
     float: right;
     margin-right: 50px;
     margin-top: 15px;
@@ -240,6 +239,10 @@ label:hover {
     cursor: pointer;
 }
 
+.standard{
+    display: inline-block;
+}
+
 input[type=checkbox]:hover {
     cursor: pointer;
 }
@@ -313,3 +316,11 @@ table tr:nth-child(odd) td {
     /* Support for IE. */
     font-feature-settings: 'liga';
 }
+/* RESPONSIVE */
+@media (max-width: 1000px) {
+    .use_variant{
+        float: none !important;
+        margin-right: 0px !important;
+        margin-top: 0px !important;
+        margin-bottom: 2px !important;
+    } }
