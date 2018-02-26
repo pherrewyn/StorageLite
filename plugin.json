@@ -8,7 +8,7 @@
     "type"              :"template",
     "pluginIcon"        :"icon_plugin_xs.png",
     "version"           :"1.0.0",
-    "license"           :"MIT",
+    "license"           :"Copyright by Pascal Herrewyn GmbH",
     "price"             :0,    
     "serviceProvider"   :"Storage24Lite\\Providers\\WarehouseServiceProvider",
     "shortDescription": {
