@@ -7,7 +7,7 @@
     "authorIcon"        :"icon_author_xs.png",
     "type"              :"template",
     "pluginIcon"        :"icon_plugin_xs.png",
-    "version"           :"1.0.0",
+    "version"           :"1.0.1",
     "license"           :"Copyright by Pascal Herrewyn GmbH",
     "price"             :0,
     "isClosedSource"    : true,    
