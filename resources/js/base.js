@@ -148,7 +148,6 @@ function findPlaces() {
                 },
                 data: {
                     variationId: variationId,
-                    with: "storageLocation"
                 },
                 success: function(data) {
                     console.log(data);
@@ -214,12 +213,12 @@ function getLocationName(locationames) {
             setTimeout(function() {
                 $.ajax({
                     type: "GET",
-                    url: "/rest/stockmanagement/warehouses/" + warehouseId + "/management/storageLocations/" + locationId,
+                    url: "/rest/warehouses/locations/" + locationId,
                     headers: {
                         "Authorization": "Bearer " + localStorage.getItem("accessToken")
                     },
                     success: function(data) {
-                        $('.place[sid=' + locationId + ']').text(data['name']);
+                        $('.place[sid=' + locationId + ']').text(data['label']);
                     },
                     error: function(data) {
                         console.log(data);
